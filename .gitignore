@@ -1,0 +1,5 @@
+inventario_cd.csv
+__pycache__/
+*.pyc
+errores.log
+evidencias/
