@@ -178,155 +178,206 @@ def leer_csv(archivo):
     """Prepara la lectura de los registros de un archivo CSV."""
     return csv.DictReader(archivo)
 
-# Inicialización de contadores
-total_productos = 0
-total_bajo_stock = 0
-total_sobrestock = 0
-total_stock_normal = 0
-total_registros_invalidos = 0
-errores_detectados = []
-# Acumuladores de reposición
-total_unidades_reponer = 0
-costo_total_reposicion = 0.0
-# Agrupación de resultados
-bajo_stock_por_categoria = {}
-alertas_por_proveedor = {}
-casos_extrema_urgencia = []
-ordenes_compra = []
-registros_inventario = []
+def generar_reporte_consola(validos, invalidos, bajo_stock, sobrestock,
+                           normales, unidades, costo):
+    """Presenta los indicadores principales del inventario."""
 
-# Lectura del archivo CSV
-with open(ARCHIVO_ENTRADA, mode="r", encoding="utf-8") as archivo:
-    lector = leer_csv(archivo)
+    print("\n===== REPORTE EJECUTIVO V3 =====")
+    print(f"Productos válidos: {validos}")
+    print(f"Registros descartados: {invalidos}")
+    print(f"Productos bajo stock: {bajo_stock}")
+    print(f"Productos con sobrestock: {sobrestock}")
+    print(f"Productos normales: {normales}")
+    print(f"Unidades a reponer: {unidades}")
+    print(f"Costo estimado: ${costo:,.0f}")
 
-    for fila in lector:
-                # Validar los tipos de datos
-        es_valido, registro_convertido, errores = validar_tipos(fila)
+    return validos
+def main():
+    """Coordina la validación, el procesamiento y los reportes."""
+    # Inicialización de contadores
+    total_productos = 0
+    total_bajo_stock = 0
+    total_sobrestock = 0
+    total_stock_normal = 0
+    total_registros_invalidos = 0
+    errores_detectados = []
+    # Acumuladores de reposición
+    total_unidades_reponer = 0
+    costo_total_reposicion = 0.0
+    # Agrupación de resultados
+    bajo_stock_por_categoria = {}
+    alertas_por_proveedor = {}
+    casos_extrema_urgencia = []
+    ordenes_compra = []
+    registros_inventario = []
 
-        if not es_valido:
-            total_registros_invalidos += 1
-            errores_detectados.extend(errores)
-            continue
+    # Lectura del archivo CSV
+    with open(ARCHIVO_ENTRADA, mode="r", encoding="utf-8") as archivo:
+        lector = leer_csv(archivo)
 
-        # Validar las reglas de negocio
-        es_valido_negocio, errores_negocio = validar_reglas_negocio(
-            registro_convertido
-        )
+        for fila in lector:
+                    # Validar los tipos de datos
+            es_valido, registro_convertido, errores = validar_tipos(fila)
 
-        if not es_valido_negocio:
-            total_registros_invalidos += 1
-            errores_detectados.extend(errores_negocio)
-            continue
+            if not es_valido:
+                total_registros_invalidos += 1
+                errores_detectados.extend(errores)
+                continue
 
-        # Utilizar el registro validado
-        fila = registro_convertido
-        # Conversión de datos
-        stock_actual = fila["stock_actual"]
-        stock_minimo = fila["stock_minimo"]
-        stock_maximo = fila["stock_maximo"]
-        demanda_semanal = fila["demanda_semanal"]
-        costo_unitario = fila["costo_unitario"]
-        categoria = fila["categoria"]
-        proveedor = fila["proveedor"]
-        lead_time_dias = fila["lead_time_dias"]
-
-        # Almacenar registro del inventario
-        registros_inventario.append(fila.copy())
-
-        # Contar cada producto procesado
-        total_productos += 1
-
-        # Clasificar el inventario
-        if stock_actual < stock_minimo:
-            total_bajo_stock += 1
-
-                # Calcular cantidad necesaria para reponer
-            cantidad_a_reponer, costo_reposicion = calcular_reposicion(
-                stock_actual, stock_maximo, costo_unitario
+            # Validar las reglas de negocio
+            es_valido_negocio, errores_negocio = validar_reglas_negocio(
+                registro_convertido
             )
 
-               # Acumular resultados
-            total_unidades_reponer += cantidad_a_reponer
-            costo_total_reposicion += costo_reposicion
-            # Registrar orden de compra
-            ordenes_compra.append({
-                "id_producto": fila["id_producto"],
-                "producto": fila["producto"],
-                "cantidad_a_reponer": cantidad_a_reponer,
-                "costo_total_reposicion": round(costo_reposicion, 0),
-                "proveedor": proveedor,
-                "dias_estimados_reposicion": lead_time_dias
+            if not es_valido_negocio:
+                total_registros_invalidos += 1
+                errores_detectados.extend(errores_negocio)
+                continue
 
-            })
-                        # Contabilizar productos bajo stock por categoria
-            if categoria not in bajo_stock_por_categoria:
-                bajo_stock_por_categoria[categoria] = 0
+            # Utilizar el registro validado
+            fila = registro_convertido
+            # Conversión de datos
+            stock_actual = fila["stock_actual"]
+            stock_minimo = fila["stock_minimo"]
+            stock_maximo = fila["stock_maximo"]
+            demanda_semanal = fila["demanda_semanal"]
+            costo_unitario = fila["costo_unitario"]
+            categoria = fila["categoria"]
+            proveedor = fila["proveedor"]
+            lead_time_dias = fila["lead_time_dias"]
 
-            bajo_stock_por_categoria[categoria] += 1
+            # Almacenar registro del inventario
+            registros_inventario.append(fila.copy())
 
-            # Contabilizar productos bajo stock por proveedor
-            if proveedor not in alertas_por_proveedor:
-                alertas_por_proveedor[proveedor] = 0
+            # Contar cada producto procesado
+            total_productos += 1
 
-            alertas_por_proveedor[proveedor] += 1
+            # Clasificar el inventario
+            if stock_actual < stock_minimo:
+                total_bajo_stock += 1
 
-            # Identificar productos de extrema urgencia
-            if lead_time_dias > UMBRAL_EXTREMA_URGENCIA:
-                casos_extrema_urgencia.append({
+                    # Calcular cantidad necesaria para reponer
+                cantidad_a_reponer, costo_reposicion = calcular_reposicion(
+                    stock_actual, stock_maximo, costo_unitario
+                )
+
+                # Acumular resultados
+                total_unidades_reponer += cantidad_a_reponer
+                costo_total_reposicion += costo_reposicion
+                # Registrar orden de compra
+                ordenes_compra.append({
                     "id_producto": fila["id_producto"],
-                    "producto": fila["producto"]
-                    })
-        elif stock_actual > stock_maximo:
-            total_sobrestock += 1
+                    "producto": fila["producto"],
+                    "cantidad_a_reponer": cantidad_a_reponer,
+                    "costo_total_reposicion": round(costo_reposicion, 0),
+                    "proveedor": proveedor,
+                    "dias_estimados_reposicion": lead_time_dias
 
-        else:
-            total_stock_normal += 1
-# Guardar los errores detectados
-total_errores_registrados = registrar_errores(errores_detectados)
-# Mostrar resultados
-print("===== RESUMEN DE INVENTARIO =====")
-print(f"Registros inválidos descartados: {total_registros_invalidos}")
-print(f"Total de errores detectados: {len(errores_detectados)}")
-print(f"Productos procesados: {total_productos}")
-print(f"Productos bajo stock: {total_bajo_stock}")
-print(f"Productos con sobrestock: {total_sobrestock}")
-print(f"Productos con stock normal: {total_stock_normal}")
-print(f"Total de unidades a reponer: {total_unidades_reponer}")
-print(f"Costo total de reposición: ${costo_total_reposicion:,.0f}")
+                })
+                            # Contabilizar productos bajo stock por categoria
+                if categoria not in bajo_stock_por_categoria:
+                    bajo_stock_por_categoria[categoria] = 0
 
-# Identificar categoria mas critica
-categoria_mas_critica = max(
-    bajo_stock_por_categoria,
-    key=bajo_stock_por_categoria.get
-)
+                bajo_stock_por_categoria[categoria] += 1
 
-print(f"Categoria mas critica: {categoria_mas_critica}")
+                # Contabilizar productos bajo stock por proveedor
+                if proveedor not in alertas_por_proveedor:
+                    alertas_por_proveedor[proveedor] = 0
 
-# Mostrar alertas por proveedor
-print("\n===== ALERTAS POR PROVEEDOR =====")
+                alertas_por_proveedor[proveedor] += 1
 
-for proveedor, cantidad in alertas_por_proveedor.items():
-    print(f"{proveedor}: {cantidad} productos")
+                # Identificar productos de extrema urgencia
+                if lead_time_dias > UMBRAL_EXTREMA_URGENCIA:
+                    casos_extrema_urgencia.append({
+                        "id_producto": fila["id_producto"],
+                        "producto": fila["producto"]
+                        })
+            elif stock_actual > stock_maximo:
+                total_sobrestock += 1
 
-# Resumen de extrema urgencia
-print("\n===== EXTREMA URGENCIA =====")
-print(f"Total de productos de extrema urgencia: {len(casos_extrema_urgencia)}")
+            else:
+                total_stock_normal += 1
+    # Guardar los errores detectados
+    total_errores_registrados = registrar_errores(errores_detectados)
+    # Mostrar resultados
+    print("===== RESUMEN DE INVENTARIO =====")
+    print(f"Registros inválidos descartados: {total_registros_invalidos}")
+    print(f"Total de errores detectados: {len(errores_detectados)}")
+    print(f"Productos procesados: {total_productos}")
+    print(f"Productos bajo stock: {total_bajo_stock}")
+    print(f"Productos con sobrestock: {total_sobrestock}")
+    print(f"Productos con stock normal: {total_stock_normal}")
+    print(f"Total de unidades a reponer: {total_unidades_reponer}")
+    print(f"Costo total de reposición: ${costo_total_reposicion:,.0f}")
 
-for caso in casos_extrema_urgencia:
-    print(f"{caso['id_producto']} - {caso['producto']}")
-    # Generar archivo de ordenes de compra
-ARCHIVO_SALIDA = "ordenes_compra_urgente_v3.csv"
+    # Identificar categoria mas critica
+    categoria_mas_critica = max(
+        bajo_stock_por_categoria,
+        key=bajo_stock_por_categoria.get
+    )
 
-columnas_salida = [
-    "id_producto",
-    "producto",
-    "cantidad_a_reponer",
-    "costo_total_reposicion",
-    "proveedor",
-    "dias_estimados_reposicion"
-]
+    print(f"Categoria mas critica: {categoria_mas_critica}")
 
-escribir_csv_salida(ordenes_compra, columnas_salida, ARCHIVO_SALIDA)
+    # Mostrar alertas por proveedor
+    print("\n===== ALERTAS POR PROVEEDOR =====")
 
-print("\nArchivo de ordenes de compra generado correctamente.")
-print(f"Total de ordenes registradas: {len(ordenes_compra)}")
+    for proveedor, cantidad in alertas_por_proveedor.items():
+        print(f"{proveedor}: {cantidad} productos")
+
+    # Resumen de extrema urgencia
+    print("\n===== EXTREMA URGENCIA =====")
+    print(f"Total de productos de extrema urgencia: {len(casos_extrema_urgencia)}")
+
+    for caso in casos_extrema_urgencia:
+        print(f"{caso['id_producto']} - {caso['producto']}")
+        # Generar archivo de ordenes de compra
+    ARCHIVO_SALIDA = "ordenes_compra_urgente_v3.csv"
+
+    columnas_salida = [
+        "id_producto",
+        "producto",
+        "cantidad_a_reponer",
+        "costo_total_reposicion",
+        "proveedor",
+        "dias_estimados_reposicion"
+    ]
+
+    escribir_csv_salida(ordenes_compra, columnas_salida, ARCHIVO_SALIDA)
+
+    print("\nArchivo de ordenes de compra generado correctamente.")
+    print(f"Total de ordenes registradas: {len(ordenes_compra)}")
+    generar_reporte_consola(
+        total_productos,
+        total_registros_invalidos,
+        total_bajo_stock,
+        total_sobrestock,
+        total_stock_normal,
+        total_unidades_reponer,
+        costo_total_reposicion
+    )
+
+
+if __name__ == "__main__":
+    try:
+        main()
+
+    except FileNotFoundError as error:
+        mensaje = f"Archivo no encontrado: {error}"
+        print(f"ERROR: {mensaje}")
+        registrar_errores([mensaje])
+
+    except PermissionError as error:
+        mensaje = f"Permiso denegado: {error}"
+        print(f"ERROR: {mensaje}")
+        try:
+            registrar_errores([mensaje])
+        except PermissionError:
+            print("No fue posible escribir en errores.log")
+
+    except (ValueError, TypeError) as error:
+        mensaje = f"Error de datos: {type(error).__name__}: {error}"
+        print(f"ERROR: {mensaje}")
+        registrar_errores([mensaje])
+
+    finally:
+        print("\nProceso finalizado.")
