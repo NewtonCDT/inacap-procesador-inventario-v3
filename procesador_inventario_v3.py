@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 
 ARCHIVO_ENTRADA = "inventario_cd.csv"
 UMBRAL_EXTREMA_URGENCIA = 5
@@ -133,11 +134,57 @@ def validar_reglas_negocio(registro):
 
     return es_valido, errores
 
+
+def registrar_errores(errores, archivo="errores.log"):
+    """
+    Guarda los errores detectados en un archivo de registro.
+
+    Args:
+        errores: Lista de mensajes.
+        archivo: Nombre del archivo de salida.
+    """
+
+    if not errores:
+        return 0
+
+    with open(archivo, mode="a", encoding="utf-8") as log:
+        for error in errores:
+            fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            log.write(f"{fecha} | ERROR | {error}\n")
+
+    return len(errores)
+
+
+def escribir_csv_salida(ordenes, columnas, archivo_salida="ordenes_compra_urgente_v3.csv"):
+    """Guarda las órdenes de compra en un archivo CSV."""
+
+    with open(archivo_salida, mode="w", encoding="utf-8", newline="") as archivo:
+        escritor = csv.DictWriter(archivo, fieldnames=columnas)
+        escritor.writeheader()
+        escritor.writerows(ordenes)
+
+    return len(ordenes)
+
+
+def calcular_reposicion(stock_actual, stock_maximo, costo_unitario):
+    """Calcula las unidades y el costo de reposición."""
+
+    cantidad = stock_maximo - stock_actual
+    costo = cantidad * costo_unitario
+
+    return cantidad, costo
+
+def leer_csv(archivo):
+    """Prepara la lectura de los registros de un archivo CSV."""
+    return csv.DictReader(archivo)
+
 # Inicialización de contadores
 total_productos = 0
 total_bajo_stock = 0
 total_sobrestock = 0
 total_stock_normal = 0
+total_registros_invalidos = 0
+errores_detectados = []
 # Acumuladores de reposición
 total_unidades_reponer = 0
 costo_total_reposicion = 0.0
@@ -150,19 +197,38 @@ registros_inventario = []
 
 # Lectura del archivo CSV
 with open(ARCHIVO_ENTRADA, mode="r", encoding="utf-8") as archivo:
-    lector = csv.DictReader(archivo)
+    lector = leer_csv(archivo)
 
     for fila in lector:
+                # Validar los tipos de datos
+        es_valido, registro_convertido, errores = validar_tipos(fila)
 
+        if not es_valido:
+            total_registros_invalidos += 1
+            errores_detectados.extend(errores)
+            continue
+
+        # Validar las reglas de negocio
+        es_valido_negocio, errores_negocio = validar_reglas_negocio(
+            registro_convertido
+        )
+
+        if not es_valido_negocio:
+            total_registros_invalidos += 1
+            errores_detectados.extend(errores_negocio)
+            continue
+
+        # Utilizar el registro validado
+        fila = registro_convertido
         # Conversión de datos
-        stock_actual = int(fila["stock_actual"])
-        stock_minimo = int(fila["stock_minimo"])
-        stock_maximo = int(fila["stock_maximo"])
-        demanda_semanal = int(fila["demanda_semanal"])
-        costo_unitario = float(fila["costo_unitario"])
+        stock_actual = fila["stock_actual"]
+        stock_minimo = fila["stock_minimo"]
+        stock_maximo = fila["stock_maximo"]
+        demanda_semanal = fila["demanda_semanal"]
+        costo_unitario = fila["costo_unitario"]
         categoria = fila["categoria"]
         proveedor = fila["proveedor"]
-        lead_time_dias = int(fila["lead_time_dias"])
+        lead_time_dias = fila["lead_time_dias"]
 
         # Almacenar registro del inventario
         registros_inventario.append(fila.copy())
@@ -175,10 +241,9 @@ with open(ARCHIVO_ENTRADA, mode="r", encoding="utf-8") as archivo:
             total_bajo_stock += 1
 
                 # Calcular cantidad necesaria para reponer
-            cantidad_a_reponer = stock_maximo - stock_actual
-
-                # Calcular costo de reposición
-            costo_reposicion = cantidad_a_reponer * costo_unitario
+            cantidad_a_reponer, costo_reposicion = calcular_reposicion(
+                stock_actual, stock_maximo, costo_unitario
+            )
 
                # Acumular resultados
             total_unidades_reponer += cantidad_a_reponer
@@ -189,7 +254,9 @@ with open(ARCHIVO_ENTRADA, mode="r", encoding="utf-8") as archivo:
                 "producto": fila["producto"],
                 "cantidad_a_reponer": cantidad_a_reponer,
                 "costo_total_reposicion": round(costo_reposicion, 0),
-                "proveedor": proveedor
+                "proveedor": proveedor,
+                "dias_estimados_reposicion": lead_time_dias
+
             })
                         # Contabilizar productos bajo stock por categoria
             if categoria not in bajo_stock_por_categoria:
@@ -214,9 +281,12 @@ with open(ARCHIVO_ENTRADA, mode="r", encoding="utf-8") as archivo:
 
         else:
             total_stock_normal += 1
-
+# Guardar los errores detectados
+total_errores_registrados = registrar_errores(errores_detectados)
 # Mostrar resultados
 print("===== RESUMEN DE INVENTARIO =====")
+print(f"Registros inválidos descartados: {total_registros_invalidos}")
+print(f"Total de errores detectados: {len(errores_detectados)}")
 print(f"Productos procesados: {total_productos}")
 print(f"Productos bajo stock: {total_bajo_stock}")
 print(f"Productos con sobrestock: {total_sobrestock}")
@@ -245,20 +315,18 @@ print(f"Total de productos de extrema urgencia: {len(casos_extrema_urgencia)}")
 for caso in casos_extrema_urgencia:
     print(f"{caso['id_producto']} - {caso['producto']}")
     # Generar archivo de ordenes de compra
-ARCHIVO_SALIDA = "ordenes_compra_urgente.csv"
+ARCHIVO_SALIDA = "ordenes_compra_urgente_v3.csv"
 
 columnas_salida = [
     "id_producto",
     "producto",
     "cantidad_a_reponer",
     "costo_total_reposicion",
-    "proveedor"
+    "proveedor",
+    "dias_estimados_reposicion"
 ]
 
-with open(ARCHIVO_SALIDA, mode="w", encoding="utf-8", newline="") as archivo:
-    escritor = csv.DictWriter(archivo, fieldnames=columnas_salida)
-    escritor.writeheader()
-    escritor.writerows(ordenes_compra)
+escribir_csv_salida(ordenes_compra, columnas_salida, ARCHIVO_SALIDA)
 
 print("\nArchivo de ordenes de compra generado correctamente.")
 print(f"Total de ordenes registradas: {len(ordenes_compra)}")
