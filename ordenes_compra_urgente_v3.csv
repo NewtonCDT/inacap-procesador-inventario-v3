@@ -1,0 +1,223 @@
+id_producto,producto,cantidad_a_reponer,costo_total_reposicion,proveedor,dias_estimados_reposicion
+P004,Pasta dental mentol 100 ml,62,79980.0,ProvB,5
+P007,Crema de leche 200 ml,133,171570.0,ProvA,3
+P009,Jugo naranja natural 1 L,103,194670.0,ProvB,5
+P010,Leche de avena 1 L,145,303050.0,ProvB,4
+P013,Crema de manos 100 ml,73,116070.0,ProvC,6
+P015,Bebida Cola 1.5 L,151,173650.0,ProvA,3
+P016,Leche descremada 1 L,145,158050.0,ProvC,2
+P018,Leche de avena 1 L,147,321930.0,ProvB,5
+P021,Limpiavidrios 500 ml,51,91290.0,ProvB,5
+P022,Sardinas en tomate 125 g,141,125490.0,ProvC,6
+P023,Mantequilla con sal 200 g,164,441160.0,ProvC,2
+P026,Alimento perro adulto 3 kg,55,494450.0,ProvB,5
+P032,Pipeta antipulgas gato,77,199430.0,ProvA,3
+P033,Bebida naranja 1.5 L,131,168990.0,ProvB,4
+P036,Suavizante ropa 1 L,75,179250.0,ProvB,4
+P044,Crema hidratante 200 ml,105,366450.0,ProvA,3
+P047,Agua mineral 1.5 L,142,110760.0,ProvA,3
+P048,Paños de cocina 3 un,109,140610.0,ProvB,4
+P051,Néctares surtidos 1 L,117,127530.0,ProvC,6
+P052,Pasta dental mentol 100 ml,82,122180.0,ProvB,5
+P054,Leche condensada 397 g,140,250600.0,ProvC,2
+P063,Suavizante ropa 1 L,93,231570.0,ProvB,4
+P064,Jugo mora 1 L,161,175490.0,ProvC,2
+P067,Yogurt bebible 200 ml,144,84960.0,ProvA,3
+P071,Pan molde integral,81,136890.0,ProvB,5
+P080,Galletas María 200 g,106,73140.0,ProvB,5
+P081,Detergente polvo 1 kg,120,370800.0,ProvC,6
+P082,Vinagre 500 ml,159,93810.0,ProvC,6
+P087,Fideos 400 g,93,82770.0,ProvB,4
+P088,Queso gauda laminado 200 g,148,368520.0,ProvC,2
+P089,Desodorante roll-on 50 ml,118,234820.0,ProvB,5
+P090,Mantequilla 250 g,105,345450.0,ProvA,4
+P092,Alimento cachorro 1.5 kg,38,246620.0,ProvC,2
+P098,Limpiavidrios 500 ml,44,74360.0,ProvB,4
+P099,Bebida sin azúcar 1.5 L,123,170970.0,ProvA,3
+P100,Alcohol gel 500 ml,117,396630.0,ProvB,4
+P103,Depiladora desechable 3 un,88,122320.0,ProvB,5
+P104,Guantes domésticos S,113,134470.0,ProvC,2
+P107,Macarrones 400 g,111,96570.0,ProvB,5
+P110,Shampoo hidratante 400 ml,130,388700.0,ProvB,4
+P112,Miel 500 g,168,554400.0,ProvC,2
+P113,Lavalozas 750 ml,62,102300.0,ProvC,2
+P114,Queso parmesano rallado 100 g,107,319930.0,ProvB,5
+P115,Talco 150 g,102,131580.0,ProvC,2
+P116,Vinagre 500 ml,117,80730.0,ProvC,2
+P117,Sal 1 kg,120,54000.0,ProvC,2
+P118,Cereales 500 g,121,313390.0,ProvA,4
+P119,Escoba plástica mediana,48,133920.0,ProvA,4
+P123,Desodorante roll-on 50 ml,118,246620.0,ProvB,5
+P124,Jabón barra pack 3 un,64,63360.0,ProvA,3
+P126,Chocapic 500 g,78,233220.0,ProvC,6
+P127,Mantequilla 250 g,59,182310.0,ProvA,4
+P133,Champú mascotas 250 ml,36,136440.0,ProvA,3
+P135,Toalla papel 2 rollos,125,173750.0,ProvB,4
+P137,Chocapic 500 g,99,305910.0,ProvC,6
+P139,Té 25 bolsitas,110,119900.0,ProvB,5
+P141,Jugo mora 1 L,171,203490.0,ProvC,2
+P143,Crema de leche 200 ml,153,166770.0,ProvA,3
+P145,Pipeta antipulgas gato,75,171750.0,ProvA,4
+P147,Mantequilla 250 g,106,316940.0,ProvA,4
+P150,Bebida lima-limón 1.5 L,166,214140.0,ProvB,4
+P151,Té helado durazno 1.5 L,139,193210.0,ProvC,6
+P152,Bebida naranja 1.5 L,161,191590.0,ProvB,5
+P154,Sémola 500 g,173,114180.0,ProvA,4
+P156,Café instantáneo 170 g,120,598800.0,ProvC,2
+P161,Miel 500 g,165,528000.0,ProvC,6
+P162,Gel ducha 400 ml,106,242740.0,ProvC,6
+P164,Atún al agua 170 g,140,166600.0,ProvA,3
+P166,Cama mascota pequeña,46,312340.0,ProvC,6
+P168,Suavizante ropa 1 L,81,201690.0,ProvB,5
+P171,Alimento cachorro 1.5 kg,55,351450.0,ProvC,2
+P173,Té 25 bolsitas,85,84150.0,ProvB,5
+P176,Té 25 bolsitas,76,82840.0,ProvB,5
+P178,Atún al agua 170 g,161,223790.0,ProvA,3
+P179,Mascarillas descartables 10 un,99,147510.0,ProvA,3
+P180,Bebida energética 250 ml,146,246740.0,ProvC,2
+P181,Sémola 500 g,151,129860.0,ProvA,3
+P182,Arroz integral 1 kg,80,134400.0,ProvC,2
+P184,Pasta dental mentol 100 ml,81,96390.0,ProvB,5
+P191,Sémola 500 g,161,122360.0,ProvA,3
+P193,Bebida Cola 1.5 L,116,121800.0,ProvA,3
+P198,Toallas húmedas 40 un,115,171350.0,ProvA,4
+P199,Queso fresco 250 g,102,192780.0,ProvB,5
+P201,Queso parmesano rallado 100 g,145,404550.0,ProvB,4
+P203,Servilletas 100 un,59,28910.0,ProvA,3
+P204,Shampoo anticaspa 400 ml,131,391690.0,ProvB,4
+P205,Puré instantáneo 125 g,140,110600.0,ProvC,2
+P206,Limpiavidrios 500 ml,49,73010.0,ProvB,5
+P207,Esponjas fibra 3 un,53,31270.0,ProvC,2
+P208,Pan molde blanco,90,134100.0,ProvC,6
+P214,Bolsas plásticas 30 un,99,88110.0,ProvB,5
+P219,Chocapic 500 g,62,191580.0,ProvC,6
+P220,Limpiavidrios 500 ml,49,77910.0,ProvB,4
+P221,Acondicionador 400 ml,75,231750.0,ProvA,4
+P222,Mantequilla 250 g,70,230300.0,ProvA,4
+P223,Agua saborizada 1 L,137,135630.0,ProvA,4
+P224,Queso crema 180 g,106,221540.0,ProvB,5
+P226,Pasta dental mentol 100 ml,62,79980.0,ProvB,5
+P227,Salsa tomate 400 g,117,80730.0,ProvB,4
+P230,Shampoo anticaspa 400 ml,130,440700.0,ProvB,5
+P231,Cacao en polvo 200 g,95,189050.0,ProvA,4
+P232,Lavalozas 750 ml,59,85550.0,ProvC,2
+P234,Acondicionador 400 ml,71,212290.0,ProvA,4
+P237,Acondicionador 400 ml,81,242190.0,ProvA,4
+P238,Queso parmesano rallado 100 g,106,285140.0,ProvB,5
+P245,Fideos 400 g,110,97900.0,ProvB,4
+P246,Leche condensada 397 g,123,269370.0,ProvC,2
+P247,Juguete perro,80,207200.0,ProvC,2
+P249,Azúcar 1 kg,89,102350.0,ProvB,5
+P251,Recogedor plástico,59,111510.0,ProvB,5
+P253,Comedero plástico 400 ml,67,99830.0,ProvB,5
+P254,Crema de leche 200 ml,168,216720.0,ProvA,4
+P256,Toallas húmedas 40 un,104,154960.0,ProvA,3
+P258,Desodorante roll-on 50 ml,122,267180.0,ProvB,5
+P259,Aromatizante hogar 360 ml,89,177110.0,ProvA,4
+P264,Galletas María 200 g,80,63200.0,ProvB,4
+P265,Pipeta antipulgas perro S,47,107630.0,ProvB,5
+P267,Tomate enlatado 400 g,187,147730.0,ProvA,3
+P268,Leche condensada 397 g,108,214920.0,ProvC,2
+P269,Cacao en polvo 200 g,136,270640.0,ProvA,3
+P270,Bebida energética 250 ml,121,180290.0,ProvC,6
+P271,Toallas húmedas 40 un,106,168540.0,ProvA,3
+P273,Detergente líquido 3 L,101,463590.0,ProvC,2
+P274,Manjar 400 g,120,238800.0,ProvC,6
+P276,Chocapic 500 g,84,251160.0,ProvC,6
+P279,Cama mascota pequeña,44,307560.0,ProvC,2
+P285,Queso gauda laminado 200 g,157,390930.0,ProvC,6
+P286,Margarina 500 g,147,263130.0,ProvC,2
+P287,Chocapic 500 g,63,213570.0,ProvC,6
+P288,Atún al agua 170 g,145,187050.0,ProvA,4
+P293,Chocapic 500 g,77,222530.0,ProvC,2
+P296,Mermelada frutilla 350 g,115,228850.0,ProvB,4
+P298,Cama mascota pequeña,37,251230.0,ProvC,2
+P301,Cloro gel 500 ml,77,99330.0,ProvA,4
+P302,Galletas chocolate 150 g,166,147740.0,ProvB,4
+P303,Suavizante ropa 1 L,78,194220.0,ProvB,4
+P304,Snacks gato 60 g,74,88060.0,ProvB,5
+P308,Quitagrasa 500 ml,52,98280.0,ProvC,2
+P309,Miel 500 g,158,505600.0,ProvC,6
+P310,Pan molde blanco,85,109650.0,ProvC,6
+P313,Correa perro básica,70,216300.0,ProvB,4
+P319,Jabón líquido manos 500 ml,82,154980.0,ProvC,2
+P321,Escoba plástica mediana,58,167620.0,ProvA,4
+P323,Algodón 100 g,118,116820.0,ProvC,2
+P326,Agua 5 L,175,295750.0,ProvB,4
+P329,Vinagre 500 ml,149,28310.0,ProvC,2
+P332,Esponjas pack 3 un,86,76540.0,ProvB,4
+P333,Vinagre 500 ml,142,69580.0,ProvC,2
+P334,Leche entera 1 L,144,156960.0,ProvB,5
+P340,Vinagre 500 ml,161,78890.0,ProvC,2
+P344,Lustramuebles 300 ml,80,127200.0,ProvB,5
+P346,Pipeta antipulgas gato,71,190990.0,ProvA,3
+P351,Servilletas 100 un,49,24010.0,ProvA,4
+P352,Café instantáneo 170 g,122,559980.0,ProvC,6
+P358,Crema ácida 200 g,81,136890.0,ProvA,4
+P359,Pipeta antipulgas gato,72,179280.0,ProvA,4
+P361,Galletas chocolate 150 g,138,109020.0,ProvB,5
+P363,Lavalozas 750 ml,88,145200.0,ProvC,2
+P365,Cloro gel 500 ml,105,145950.0,ProvA,3
+P367,Bebida Cola 1.5 L,116,156600.0,ProvA,3
+P368,Queso parmesano rallado 100 g,126,364140.0,ProvB,5
+P369,Margarina 500 g,168,334320.0,ProvC,2
+P370,Alimento gato adulto 1.5 kg,67,401330.0,ProvA,3
+P372,Limpiador baño 500 ml,81,136890.0,ProvC,2
+P373,Toalla papel 2 rollos,112,144480.0,ProvB,5
+P377,Agua 5 L,169,184210.0,ProvB,5
+P378,Mayonesa 400 g,95,141550.0,ProvA,4
+P379,Bebida jengibre 1 L,170,287300.0,ProvC,6
+P385,Harina 1 kg,115,112700.0,ProvA,4
+P392,Levadura seca 11 g,112,54880.0,ProvA,4
+P393,Papel hig. suave pack 4 un,70,188300.0,ProvB,5
+P399,Toallas húmedas 40 un,106,189740.0,ProvA,3
+P400,Depiladora desechable 3 un,102,141780.0,ProvB,5
+P402,Bebida naranja 1.5 L,122,157380.0,ProvB,5
+P403,Crema de leche 200 ml,131,168990.0,ProvA,4
+P404,Juguete perro,80,191200.0,ProvC,6
+P405,Queso crema 180 g,112,245280.0,ProvB,4
+P408,Salsa tomate 400 g,102,90780.0,ProvB,4
+P409,Bebida toronja 1.5 L,98,126420.0,ProvB,4
+P412,Alcohol gel 500 ml,123,392370.0,ProvB,5
+P413,Lavalozas 750 ml,76,110200.0,ProvC,6
+P419,Jugo manzana natural 1 L,197,372330.0,ProvA,4
+P420,Crema ácida 200 g,62,92380.0,ProvA,3
+P422,Esponjas fibra 3 un,58,45820.0,ProvC,6
+P423,Bebida frutada 1.5 L,102,141780.0,ProvA,4
+P425,Collar perro ajustable,48,95520.0,ProvA,3
+P426,Arroz 1 kg,96,120000.0,ProvA,4
+P428,Comedero plástico 400 ml,68,114920.0,ProvB,5
+P431,Avena 500 g,158,235420.0,ProvB,4
+P433,Crema de leche 200 ml,153,182070.0,ProvA,3
+P434,Queso parmesano rallado 100 g,116,346840.0,ProvB,5
+P435,Depiladora desechable 3 un,91,90090.0,ProvB,5
+P438,Cacao en polvo 200 g,143,270270.0,ProvA,3
+P439,Arena sanitaria 4 kg,60,203400.0,ProvA,3
+P440,Pasta dental mentol 100 ml,76,90440.0,ProvB,5
+P443,Mantequilla 250 g,105,334950.0,ProvA,3
+P444,Pipeta antipulgas gato,76,196840.0,ProvA,3
+P447,Papel hig. suave pack 4 un,75,209250.0,ProvB,4
+P448,Pan molde blanco,97,134830.0,ProvC,2
+P450,Yogurt frutado 200 g,91,71890.0,ProvA,4
+P451,Té 25 bolsitas,121,95590.0,ProvB,4
+P452,Correa perro básica,65,194350.0,ProvB,5
+P454,Shampoo hidratante 400 ml,118,341020.0,ProvB,4
+P457,Insecticida aerosol 400 ml,81,242190.0,ProvC,2
+P461,Crema de leche 200 ml,130,141700.0,ProvA,4
+P466,Bebida naranja 1.5 L,96,143040.0,ProvB,4
+P467,Crema ácida 200 g,52,82680.0,ProvA,3
+P468,Champú mascotas 250 ml,32,114880.0,ProvA,4
+P469,Agua mineral 1.5 L,155,120900.0,ProvA,4
+P470,Toallas húmedas 40 un,105,145950.0,ProvA,3
+P474,Cereales 500 g,124,308760.0,ProvA,4
+P476,Acondicionador 400 ml,74,236060.0,ProvA,4
+P482,Chocapic 500 g,83,256470.0,ProvC,6
+P484,Leche semi 1 L,175,190750.0,ProvA,4
+P485,Bebida toronja 1.5 L,74,80660.0,ProvB,4
+P486,Alimento cachorro 1.5 kg,34,220660.0,ProvC,6
+P488,Bolsas basura 10 un grande,125,111250.0,ProvC,2
+P490,Queso parmesano rallado 100 g,147,424830.0,ProvB,4
+P491,Galletas chocolate 150 g,155,106950.0,ProvB,5
+P494,Jabón líquido manos 500 ml,76,143640.0,ProvC,6
+P499,Pipeta antipulgas gato,88,201520.0,ProvA,4
+P500,Pasta dental mentol 100 ml,93,119970.0,ProvB,4
