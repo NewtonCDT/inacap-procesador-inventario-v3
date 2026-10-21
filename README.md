@@ -35,11 +35,14 @@ python3 procesador_inventario_v3.py
 ## Resultados de referencia
 
 - 500 registros recibidos.
-- 362 productos válidos.
-- 138 registros descartados.
-- 196 órdenes de compra.
-- 21.723 unidades a reponer.
-- Costo estimado: $37.309.170.
+- 405 registros válidos.
+- 95 registros descartados (19 %).
+- 43 correcciones automáticas.
+- 222 órdenes de compra.
+- 23.285 unidades a reponer.
+- Costo total estimado: $42.804.350.
+- 28 productos de extrema urgencia.
+- Costo de extrema urgencia: $6.680.070.
 
 ## Control de versiones
 
